@@ -19,7 +19,33 @@
         </nav>
     </header>
     <?php
-        echo "ciao gg"
+       // Connessione al database.
+    $pdo = new PDO(
+        "mysql:host=db;dbname=communitydb;charset=utf8mb4",
+        getenv("DB_USER"),
+        getenv("DB_PASSWORD")
+    );
+
+    $sql = "SELECT IdCanzone, Nome, PosClassifica, NumStream, AnnoPubblicazione
+     FROM Canzone ORDER BY PosClassifica";
+
+    $query = $pdo->query($sql);
+
+    // Recupera gli utenti come oggetti.
+    $canzoni = $query->fetchAll(PDO::FETCH_OBJ);
+    if (count($canzoni) === 0) {
+        echo "<p>Nessun utente registrato.</p>";
+		return;
+    }
+    // Stampa i dati di ogni utente.
+    foreach ($canzoni as $canzone) {
+        echo "<h5>Id Canzone: " . $canzone->IdCanzone . "</h5>";
+        echo "<p>Nome: " . htmlspecialchars($canzone->Nome) . "</p>";
+        echo "<p>Posizione classifica: " . htmlspecialchars($canzone->PosClassifica) . "</p>";
+        echo "<p>Numero streams: " . htmlspecialchars($canzone->NumStream) . "</p>";
+        echo "<p>Anno pubblicazione: " . htmlspecialchars($canzone->AnnoPubblicazione) . "</p>";
+        echo "<hr>";
+    }
     ?>
 </body>
 </html>
