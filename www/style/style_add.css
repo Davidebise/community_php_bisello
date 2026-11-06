@@ -1,0 +1,78 @@
+/* add.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1db954;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Stile per il form dentro la card */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h1 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #121212;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="text"], 
+input[type="number"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus {
+    border-color: #1db954;
+}
+
+input[type="submit"] {
+    background-color: #1db954;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+input[type="submit"]:hover {
+    background-color: #1aa34a;
+}
+
+a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #1db954;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style_index.css">
     <title>Classifica Canzoni</title>
 </head>
 <body>
@@ -34,17 +35,32 @@
 
     $canzoni = $query->fetchAll(PDO::FETCH_OBJ);
     if (count($canzoni) === 0) {
-        echo "<p>Nessun utente registrato.</p>";
+        echo "<p>Nessuna canzone registrata.</p>";
 		return;
     }
-
-    foreach ($canzoni as $canzone) {
-        echo "<h5>Nome Canzone: " . $canzone->Nome . "</h5>";
-        echo "<p>Posizione classifica: " . htmlspecialchars($canzone->PosClassifica) . "</p>";
-        echo "<p>Numero streams: " . htmlspecialchars($canzone->NumStream) . "</p>";
-        echo "<p>Anno pubblicazione: " . htmlspecialchars($canzone->AnnoPubblicazione) . "</p>";
-        echo "<br>";
-    }
     ?>
+    <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Posizione</th>
+                    <th>Nome Canzone</th>
+                    <th>Numero Stream</th>
+                    <th>Anno Pubblicazione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+
+                foreach ($canzoni as $canzone) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($canzone->PosClassifica) . "</td>";
+                    echo "<td>" . htmlspecialchars($canzone->Nome) . "</td>";
+                    echo "<td>" . htmlspecialchars($canzone->NumStream) . "</td>";
+                    echo "<td>" . htmlspecialchars($canzone->AnnoPubblicazione) . "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
 </body>
 </html>

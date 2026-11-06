@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style_add.css">
     <title>Aggiungi Canzone</title>
 </head>
 <body>
@@ -16,8 +17,8 @@
                     // Legge i dati inseriti nel form.
                     $nome = $_POST["name"] ?? "";
                     $anno = $_POST["year"] ?? "";
-                    $num_stream = $_POST["position"] ?? "";
-                    $posizione = $_POST["streams"] ?? "";
+                    $num_stream = $_POST["streams"] ?? "";
+                    $posizione = $_POST["position"] ?? "";
                      // Si collega al database MySQL.
                         $pdo = new PDO(
                             "mysql:host=db;dbname=communitydb;",
@@ -25,7 +26,7 @@
                             getenv("DB_PASSWORD")
                         );
                     // Prepara la query di inserimento.
-                        $sql = "INSERT INTO Canzone (Nome, NumStream, PosClassifica, AnnoPubblicazione)
+                        $sql = "INSERT INTO CANZONE (Nome, NumStream, PosClassifica, AnnoPubblicazione)
                                 VALUES (?, ?, ?, ?)";
                         $query = $pdo->prepare($sql);
                         // Inserisce i dati al posto dei quattro punti interrogativi.
@@ -44,7 +45,7 @@
             <input type="submit" id="submit" value="Aggiungi">
         </form>
         <br>
-
+        <a href="index.php">Home</a>
     </div>
 
 </body>
