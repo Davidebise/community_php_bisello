@@ -26,25 +26,24 @@
         getenv("DB_PASSWORD")
     );
 
-    $sql = "SELECT IdCanzone, Nome, PosClassifica, NumStream, AnnoPubblicazione
-     FROM Canzone ORDER BY PosClassifica";
+    $sql = "SELECT CA.Nome, CA.PosClassifica, CA.NumStream, CA.AnnoPubblicazione
+     FROM CANZONE CA
+     ORDER BY CA.PosClassifica";
 
     $query = $pdo->query($sql);
 
-    // Recupera gli utenti come oggetti.
     $canzoni = $query->fetchAll(PDO::FETCH_OBJ);
     if (count($canzoni) === 0) {
         echo "<p>Nessun utente registrato.</p>";
 		return;
     }
-    // Stampa i dati di ogni utente.
+
     foreach ($canzoni as $canzone) {
-        echo "<h5>Id Canzone: " . $canzone->IdCanzone . "</h5>";
-        echo "<p>Nome: " . htmlspecialchars($canzone->Nome) . "</p>";
+        echo "<h5>Nome Canzone: " . $canzone->Nome . "</h5>";
         echo "<p>Posizione classifica: " . htmlspecialchars($canzone->PosClassifica) . "</p>";
         echo "<p>Numero streams: " . htmlspecialchars($canzone->NumStream) . "</p>";
         echo "<p>Anno pubblicazione: " . htmlspecialchars($canzone->AnnoPubblicazione) . "</p>";
-        echo "<hr>";
+        echo "<br>";
     }
     ?>
 </body>

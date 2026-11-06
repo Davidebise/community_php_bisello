@@ -10,27 +10,26 @@
     <div class="card">
         <h1>Aggiungi una canzone</h1>
             <?php 
-                echo "Buongiorno utente, inserisca i suoi dati";
                 // Esegue il codice quando viene inviato il form.
                 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     // Legge i dati inseriti nel form.
                     $nome = $_POST["name"] ?? "";
-                    $anno = $_POST["surname"] ?? "";
-                    $num_stream = $_POST["email"] ?? "";
-                    $posizione = $_POST["password"] ?? "";
+                    $anno = $_POST["year"] ?? "";
+                    $num_stream = $_POST["position"] ?? "";
+                    $posizione = $_POST["streams"] ?? "";
                      // Si collega al database MySQL.
                         $pdo = new PDO(
-                            "mysql:host=db;dbname=scuola;",
+                            "mysql:host=db;dbname=communitydb;",
                             getenv("DB_USER"),
                             getenv("DB_PASSWORD")
                         );
                     // Prepara la query di inserimento.
                         $sql = "INSERT INTO Canzone (Nome, NumStream, PosClassifica, AnnoPubblicazione)
-                                VALUES (?, ?, ?, ?, ?)";
+                                VALUES (?, ?, ?, ?)";
                         $query = $pdo->prepare($sql);
                         // Inserisce i dati al posto dei quattro punti interrogativi.
-                        $query->execute([$nome, $cognome, $email, $password]);
+                        $query->execute([$nome,  $num_stream,  $posizione, $anno]);
                         // Evita di ripetere l'inserimento aggiornando il browser.
                         header("Location: index.php?registrato=1");
                         exit;
