@@ -57,8 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
 
-    } catch (PDOException $e) {
-        echo "Errore durante l'inserimento nel database!";
+    } catch (PDOException $e) { //window.location.href sposta l'utente nella pagina dichiarata
+        echo "<script>
+                alert('Errore durante l\'inserimento nel database!');
+                window.location.href = 'add.php'; 
+              </script>";
     }
 }
 ?>
