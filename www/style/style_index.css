@@ -1,25 +1,30 @@
-/* index.css */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #1db954;
     margin: 0;
-    padding: 20px;
+    padding: 1.25rem; /* circa 20px */
     color: #333;
 }
+/* misure responsive :1 vh=viewport height cioè 1% dell'altezza dello schermo, mentre
+1 rem= 16 px di default, il rem si basa sulle dimensioni base del documento html(root)
+l'em si basa invece sull'elemento in cui è contenuto, quindi se la font-size di un div è 20 pc
+1 em corrisponde a 20 px */
 
-/* Header e Menu di navigazione */
 header {
     background-color: #121212;
     color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin-bottom: 25px;
+    padding: 1rem 1.25rem; 
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
 }
 
 header h1 {
-    margin: 0 0 10px 0;
-    font-size: 24px;
-    color: #1db954; /* Verde Spotify */
+    margin: 0 0 0.625rem 0;
+    font-size: clamp(1.2rem, 2vw + 1rem, 1.5rem); /* clamp:è una funzione che permette di avere il
+    testo responsive: i 3 parametri sono le misure: limite minimo, misura ideale e limite massimo*/
+    color: #1db954;
 }
 
 .menu ul {
@@ -27,7 +32,7 @@ header h1 {
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .menu a {
@@ -37,24 +42,38 @@ header h1 {
     transition: color 0.2s;
 }
 
-.menu a:hover {
+.menu a:hover { /*hover è quando si passa sopra ad un elemento*/
     color: #1db954;
 }
 
-/* Tabella delle canzoni */
+h2 {
+    color: #121212;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Contenitore per le tabelle per evitare sbavature su schermi piccoli */
+.table-container {
+    width: 100%;
+    overflow-x: auto;  /*introduce barra di scorrimento se la tabella è troppo larga */
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; /*unisce i bordi delle celle delle tabelle*/
     background: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
+    white-space: nowrap; /* Evita che il testo vada a capo in modo disordinato */
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    font-size: 0.95rem;
 }
 
 th {
@@ -64,4 +83,11 @@ th {
 
 tr:hover {
     background-color: #f1f1f1;
+}
+
+p {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: #555;
 }

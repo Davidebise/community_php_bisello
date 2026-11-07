@@ -5,26 +5,73 @@ body {
     margin: 0;
     padding: 20px;
     color: #333;
+}
+
+/* Header e Menu di navigazione sempre fissi in alto */
+header {
+    background-color: #121212;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header h1 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    color: #1db954; /* Verde Spotify */
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    gap: 20px;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.menu a:hover {
+    color: #1db954;
+}
+
+/* Contenitore per disporre le card dei form affiancate o incolonnate ordinatamente */
+.container-forms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center; /* Le centra orizzontalmente se c'è spazio */
+    align-items: flex-start;
+    margin-top: 15vh;
 }
 
 /* Stile per il form dentro la card */
-.card {
-    background: white;
+.card_songs,
+.card_artist,
+.card_album {
+    background: rgb(7, 7, 7);
     padding: 30px;
     border-radius: 8px;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
-.card h1 {
+.card_songs h1,
+.card_artist h1,
+.card_album h1 {
     margin-top: 0;
-    font-size: 22px;
-    color: #121212;
+    font-size: 20px;
+    color: #fcfafa;
     margin-bottom: 20px;
 }
 
@@ -54,6 +101,7 @@ input[type="submit"] {
     color: white;
     border: none;
     padding: 12px;
+    margin-top: 20px;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
@@ -63,16 +111,4 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #1aa34a;
-}
-
-a {
-    display: inline-block;
-    margin-top: 15px;
-    color: #1db954;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-a:hover {
-    text-decoration: underline;
 }
