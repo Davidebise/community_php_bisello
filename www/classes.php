@@ -15,11 +15,58 @@ class Canzone {
         $this->AnnoPubblicazione = $AnnoPubblicazione;
     }
 
+    //getter
     public function getIdCanzone() { return $this->IdCanzone; }
     public function getNome() { return $this->Nome; }
     public function getPosClassifica() { return $this->PosClassifica; }
     public function getNumStream() { return $this->NumStream; }
     public function getAnnoPubblicazione() { return $this->AnnoPubblicazione; }
+
+
+    // setter
+
+    public function setNome($Nome) {
+        $this->Nome = $Nome;
+    }
+
+    public function setPosClassifica($PosClassifica) {
+        $this->PosClassifica = $PosClassifica;
+    }
+
+    public function setNumStream($NumStream) {
+        $this->NumStream = $NumStream;
+    }
+
+    public function setAnnoPubblicazione($AnnoPubblicazione) {
+        $this->AnnoPubblicazione = $AnnoPubblicazione;
+    }
+
+    public static function modifySong($c){
+        $pdo = new PDO(
+            "mysql:host=db;dbname=communitydb;charset=utf8mb4",
+            getenv("DB_USER"),
+            getenv("DB_PASSWORD")
+        );
+
+        try{
+            $sql = "UPDATE CANZONE SET Nome = ?, PosClassifica = ?, 
+            NumStream = ?, AnnoPubblicazione = ?
+            WHERE IdCanzone = ?";
+            $query = $pdo->prepare($sql);
+            $query->execute([$c->getNome(), 
+            $c->getPosClassifica(), 
+            $c->getNumStream(),
+            $c->getAnnoPubblicazione(),
+            $c->getIdCanzone()
+            ]);
+        }
+        catch (PDOException $e) { //window.location.href sposta l'utente nella pagina dichiarata
+            echo "<script>
+            alert('Errore durante l\'inserimento nel database!');
+            window.location.href = 'modify.php'; 
+            </script>";
+        }
+    }
 }
 
 
@@ -38,12 +85,30 @@ class Artista {
         $this->Etichetta = $Etichetta;
     }
 
-
+    //getter
     public function getIdArtista() { return $this->IdArtista; }
     public function getNome() { return $this->Nome; }
     public function getAscoltatoriMensili() { return $this->AscoltatoriMensili; }
     public function getPosClassifica() { return $this->PosClassifica; }
     public function getEtichetta() { return $this->Etichetta; }
+
+    //setter
+
+    public function setNome($Nome) {
+        $this->Nome = $Nome;
+    }
+
+    public function setAscoltatoriMensili($AscoltatoriMensili) {
+        $this->AscoltatoriMensili = $AscoltatoriMensili;
+    }
+
+    public function setPosClassifica($PosClassifica) {
+        $this->PosClassifica = $PosClassifica;
+    }
+
+    public function setEtichetta($Etichetta) {
+        $this->Etichetta = $Etichetta;
+    }
 }
 
 
@@ -62,11 +127,29 @@ class Album {
         $this->NumStream = $NumStream;
     }
 
+    //getter
     public function getIdAlbum() { return $this->IdAlbum; }
     public function getNome() { return $this->Nome; }
     public function getPosClassifica() { return $this->PosClassifica; }
     public function getGenere() { return $this->Genere; }
     public function getNumStream() { return $this->NumStream; }
+
+    //setter
+    public function setNome($Nome) {
+        $this->Nome = $Nome;
+    }
+
+    public function setPosClassifica($PosClassifica) {
+        $this->PosClassifica = $PosClassifica;
+    }
+
+    public function setGenere($Genere) {
+        $this->Genere = $Genere;
+    }
+
+    public function setNumStream($NumStream) {
+        $this->NumStream = $NumStream;
+    }
 }
 
 ?>

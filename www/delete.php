@@ -89,6 +89,7 @@ $pdo = new PDO(
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Posizione</th>
                     <th>Nome Canzone</th>
                     <th>Numero Stream</th>
@@ -101,6 +102,7 @@ $pdo = new PDO(
 
                 foreach ($canzoni as $canzone) {
                     echo "<tr>";
+                    echo "<td>" . htmlspecialchars($canzone->IdCanzone) . "</td>";
                     echo "<td>" . htmlspecialchars($canzone->PosClassifica) . "</td>";
                     echo "<td>" . htmlspecialchars($canzone->Nome) . "</td>";
                     echo "<td>" . htmlspecialchars($canzone->NumStream) . "</td>";
@@ -123,6 +125,7 @@ $pdo = new PDO(
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nome Artista</th>
                     <th>Posizione</th>
                     <th>Ascoltatori Mensili</th>
@@ -134,12 +137,13 @@ $pdo = new PDO(
                 <?php
         foreach ($artisti as $artista) {
             echo "<tr>";
+            echo "<td>" . htmlspecialchars($artista->IdArtista) . "</td>";
             echo "<td>" . htmlspecialchars($artista->Nome) . "</td>";
             echo "<td>" . htmlspecialchars($artista->PosClassifica) . "</td>";
             echo "<td>" . htmlspecialchars($artista->AscoltatoriMensili) . "</td>";
             echo "<td>" . htmlspecialchars($artista->Etichetta) . "</td>";
             echo "<td>";
-            echo '<form action="delete.php" method="POST" onsubmit="return confirm(\'Sei sicuro di voler eliminare questa canzone?\');">';
+            echo '<form action="delete.php" method="POST" onsubmit="return confirm(\'Sei sicuro di voler eliminare questo artista?\');">';
             echo '<input type="hidden" name="id" value="' . $artista->IdArtista . '">';
             echo '<input type="hidden" name="table" value="artista">';
             echo '<button type="submit">Elimina</button>';
@@ -155,6 +159,7 @@ $pdo = new PDO(
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nome Album</th>
                     <th>Posizione</th>
                     <th>Genere</th>
@@ -166,12 +171,13 @@ $pdo = new PDO(
                 <?php
         foreach ($album as $al) {
             echo "<tr>";
+            echo "<td>" . htmlspecialchars($al->IdAlbum) . "</td>";
             echo "<td>" . htmlspecialchars($al->Nome) . "</td>";
             echo "<td>" . htmlspecialchars($al->PosClassifica) . "</td>";
             echo "<td>" . htmlspecialchars($al->Genere) . "</td>";
             echo "<td>" . htmlspecialchars($al->NumStream) . "</td>";
             echo "<td>";
-            echo '<form action="delete.php" method="POST" onsubmit="return confirm(\'Sei sicuro di voler eliminare questa canzone?\');">';
+            echo '<form action="delete.php" method="POST" onsubmit="return confirm(\'Sei sicuro di voler eliminare questo album?\');">';
             echo '<input type="hidden" name="id" value="' . $al->IdAlbum . '">';
             echo '<input type="hidden" name="table" value="album">';
             echo '<button type="submit">Elimina</button>';

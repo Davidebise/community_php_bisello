@@ -6,7 +6,7 @@
         getenv("DB_PASSWORD")
     );
 
-    $queryCanzoni = $pdo->query("SELECT Nome, PosClassifica, NumStream, AnnoPubblicazione
+    $queryCanzoni = $pdo->query("SELECT IdCanzone, Nome, PosClassifica, NumStream, AnnoPubblicazione
      FROM CANZONE 
      ORDER BY PosClassifica");
 
@@ -15,7 +15,7 @@
         echo "<p>Nessuna canzone registrata.</p>";
     }
 
-    $queryArtisti = $pdo->query("SELECT Nome, AscoltatoriMensili, PosClassifica, Etichetta 
+    $queryArtisti = $pdo->query("SELECT IdArtista, Nome, AscoltatoriMensili, PosClassifica, Etichetta 
     FROM ARTISTA
     ORDER BY PosClassifica");
     $artisti = $queryArtisti->fetchAll(PDO::FETCH_OBJ);
@@ -23,7 +23,7 @@
         echo "<p>Nessun artista registrato.</p>";
     }
 
-    $queryAlbum = $pdo->query("SELECT Nome, PosClassifica, Genere, NumStream 
+    $queryAlbum = $pdo->query("SELECT IdAlbum, Nome, PosClassifica, Genere, NumStream 
     FROM ALBUM
     ORDER BY PosClassifica");
     $album = $queryAlbum->fetchAll(PDO::FETCH_OBJ);
@@ -60,6 +60,7 @@
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Posizione</th>
                     <th>Nome Canzone</th>
                     <th>Numero Stream</th>
@@ -71,6 +72,7 @@
 
                 foreach ($canzoni as $canzone) {
                     echo "<tr>";
+                    echo "<td>" . htmlspecialchars($canzone->IdCanzone) . "</td>";
                     echo "<td>" . htmlspecialchars($canzone->PosClassifica) . "</td>";
                     echo "<td>" . htmlspecialchars($canzone->Nome) . "</td>";
                     echo "<td>" . htmlspecialchars($canzone->NumStream) . "</td>";
@@ -86,6 +88,7 @@
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nome Artista</th>
                     <th>Posizione</th>
                     <th>Ascoltatori Mensili</th>
@@ -96,6 +99,7 @@
                 <?php
         foreach ($artisti as $artista) {
             echo "<tr>";
+            echo "<td>" . htmlspecialchars($artista->IdArtista) . "</td>";
             echo "<td>" . htmlspecialchars($artista->Nome) . "</td>";
             echo "<td>" . htmlspecialchars($artista->PosClassifica) . "</td>";
             echo "<td>" . htmlspecialchars($artista->AscoltatoriMensili) . "</td>";
@@ -110,6 +114,7 @@
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nome Album</th>
                     <th>Posizione</th>
                     <th>Genere</th>
@@ -120,6 +125,7 @@
                 <?php
         foreach ($album as $al) {
             echo "<tr>";
+            echo "<td>" . htmlspecialchars($al->IdAlbum) . "</td>";
             echo "<td>" . htmlspecialchars($al->Nome) . "</td>";
             echo "<td>" . htmlspecialchars($al->PosClassifica) . "</td>";
             echo "<td>" . htmlspecialchars($al->Genere) . "</td>";
