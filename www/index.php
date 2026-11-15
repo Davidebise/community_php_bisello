@@ -1,4 +1,14 @@
 <?php
+
+    session_start(); //inizializza sessione
+
+// Controlla se l'utente NON è loggato (cioè se la variabile di sessione non esiste o è falsa)
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // Se non è loggato, reindirizzalo al login
+    header("Location: login.php");
+    exit();
+    }
+    session_regenerate_id();
        // Connessione al database.
     $pdo = new PDO(
         "mysql:host=db;dbname=communitydb;charset=utf8mb4",
@@ -54,7 +64,7 @@
             </ul>
         </nav>
     </header>
-    
+
     <div class="table-container">
         <h2>Tabella Canzoni</h2>
         <table border="1" cellpadding="10" cellspacing="0">
@@ -135,6 +145,11 @@
         ?>
             </tbody>
         </table>
+    </div>
+    <div class="footer-logout">
+        <form action="logout.php" method="POST">
+            <input type="submit" class="btn_logout" value="Esci">
+        </form>
     </div>
 </body>
 

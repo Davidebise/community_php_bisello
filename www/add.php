@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="container-forms">
         <div class="card_songs">
             <h1>Aggiungi una canzone</h1>
-            <form method="post" action="">
+            <form method="post" action="add.php">
                 <input type="hidden" name="form_tipo" value="canzone">
                 <input type="text" name="name" placeholder="Nome Canzone" required>
                 <input type="number" name="streams" placeholder="Numero Stream" required>
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <div class="card_artist">
             <h1>Aggiungi un artista</h1>
-            <form method="post" action="">
+            <form method="post" action="add.php">
                 <input type="hidden" name="form_tipo" value="artista">
                 <input type="text" name="name_artista" placeholder="Nome Artista" required>
                 <input type="number" name="listeners" placeholder="Ascoltatori Mensili" required>
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <div class="card_album">
             <h1>Aggiungi un album</h1>
-            <form method="post" action="">
+            <form method="post" action="add.php">
                 <input type="hidden" name="form_tipo" value="album">
                 <input type="text" name="name_album" placeholder="Nome Album" required>
                 <input type="number" name="position_album" placeholder="Posizione Classifica" required>

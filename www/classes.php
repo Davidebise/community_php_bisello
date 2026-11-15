@@ -109,6 +109,33 @@ class Artista {
     public function setEtichetta($Etichetta) {
         $this->Etichetta = $Etichetta;
     }
+
+    public static function modifyArtist($a){
+        $pdo = new PDO(
+            "mysql:host=db;dbname=communitydb;charset=utf8mb4",
+            getenv("DB_USER"),
+            getenv("DB_PASSWORD")
+        );
+
+        try{
+            $sql = "UPDATE ARTISTA SET Nome = ?, AscoltatoriMensili = ?, 
+            PosClassifica = ?, Etichetta = ?
+            WHERE IdArtista = ?";
+            $query = $pdo->prepare($sql);
+            $query->execute([$a->getNome(), 
+            $a->getAscoltatoriMensili(), 
+            $a->getPosClassifica(),
+            $a->getEtichetta(),
+            $a->getIdArtista()
+            ]);
+        }
+        catch (PDOException $e) { //window.location.href sposta l'utente nella pagina dichiarata
+            echo "<script>
+            alert('Errore durante l\'inserimento nel database!');
+            window.location.href = 'modify.php'; 
+            </script>";
+        }
+    }
 }
 
 
@@ -116,7 +143,7 @@ class Album {
     private $IdAlbum;
     private $Nome;
     private $PosClassifica;
-    private$Genere;
+    private $Genere;
     private $NumStream;
 
     public function __construct($IdAlbum, $Nome, $PosClassifica, $Genere, $NumStream) {
@@ -149,6 +176,33 @@ class Album {
 
     public function setNumStream($NumStream) {
         $this->NumStream = $NumStream;
+    }
+
+    public static function modifyAlbum($a){
+        $pdo = new PDO(
+            "mysql:host=db;dbname=communitydb;charset=utf8mb4",
+            getenv("DB_USER"),
+            getenv("DB_PASSWORD")
+        );
+
+        try{
+            $sql = "UPDATE ALBUM SET Nome = ?, PosClassifica = ?, 
+            NumStream = ?, Genere = ?
+            WHERE IdAlbum = ?";
+            $query = $pdo->prepare($sql);
+            $query->execute([$a->getNome(), 
+            $a->getPosClassifica(), 
+            $a->getNumStream(),
+            $a->getGenere(),
+            $a->getIdAlbum()
+            ]);
+        }
+        catch (PDOException $e) { //window.location.href sposta l'utente nella pagina dichiarata
+            echo "<script>
+            alert('Errore durante l\'inserimento nel database!');
+            window.location.href = 'modify.php'; 
+            </script>";
+        }
     }
 }
 

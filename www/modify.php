@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             getenv("DB_USER"),
             getenv("DB_PASSWORD")
         );
-        // 1. GESTIONE INSERIMENTO CANZONE
+ 
         if ($tipoForm === "canzone") {
             
             $id= $_POST["id_canzone"] ?? "";
@@ -47,33 +47,76 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
 
-        // 2. GESTIONE INSERIMENTO ARTISTA
+       
         elseif ($tipoForm === "artista") {
+            $id= $_POST["id_artista"] ?? "";
             $nome = $_POST["name_artista"] ?? "";
             $ascoltatori = $_POST["listeners"] ?? "";
             $posizione = $_POST["position_artista"] ?? "";
             $etichetta = $_POST["etichetta"] ?? "";
 
-            $sql = "INSERT INTO ARTISTA (Nome, AscoltatoriMensili, PosClassifica, Etichetta) VALUES (?, ?, ?, ?)";
-            $query = $pdo->prepare($sql);
-            $query->execute([$nome, $ascoltatori, $posizione, $etichetta]);
+            $sql = "SELECT IdArtista, Nome, AscoltatoriMensili, PosClassifica, Etichetta
+            FROM ARTISTA 
+            WHERE IdArtista = ?";
 
+            $query = $pdo->prepare($sql);
+            $query->execute([$id]);
+
+            $row = $query->fetch(PDO::FETCH_OBJ); //fetch e non fetchall perchè è solo un oggetto
+            $artista = new Artista($row->IdArtista,$row->Nome,$row->AscoltatoriMensili,$row->PosClassifica,$row->Etichetta);
+
+            if($nome !== ""){  //sostiuisco i valori vecchi con quelli nuovi
+                $artista->setNome($nome);
+            }
+            if($ascoltatori !== ""){
+                $artista->setAscoltatoriMensili($ascoltatori);
+            }
+            if($posizione !== ""){
+                $artista->setPosClassifica($posizione);
+            }
+            if($etichetta !== ""){
+                $artista-> setEtichetta($etichetta);
+            }
+
+            Artista::modifyArtist($artista);
             header("Location: index.php?registrato=1");
             exit;
         }
 
-        // 3. GESTIONE INSERIMENTO ALBUM
+    
         elseif ($tipoForm === "album") {
+            $id= $_POST["id_album"] ?? "";
             $nome = $_POST["name_album"] ?? "";
             $posizione = $_POST["position_album"] ?? "";
             $genere = $_POST["genere"] ?? "";
             $num_stream = $_POST["streams_album"] ?? "";
 
-            $sql = "INSERT INTO ALBUM (Nome, PosClassifica, Genere, NumStream) VALUES (?, ?, ?, ?)";
-            $query = $pdo->prepare($sql);
-            $query->execute([$nome, $posizione, $genere, $num_stream]);
+            $sql = "SELECT IdAlbum, Nome, PosClassifica, Genere, NumStream
+            FROM ALBUM 
+            WHERE IdAlbum = ?";
 
+            $query = $pdo->prepare($sql);
+            $query->execute([$id]);
+
+            $row = $query->fetch(PDO::FETCH_OBJ); 
+            $album = new Album($row->IdAlbum,$row->Nome,$row->PosClassifica,$row->Genere,$row->NumStream);
             
+            if($nome !== ""){  //sostiuisco i valori vecchi con quelli nuovi
+                $album->setNome($nome);
+            }
+            if($posizione !== ""){
+                $album->setPosClassifica($posizione);
+            }
+            if($num_stream !== ""){
+                $album->setNumStream($num_stream);
+            }
+            if($genere !== ""){
+                $album-> setGenere($genere);
+            }
+            
+            Album::modifyAlbum($album);
+            header("Location: index.php?registrato=1");
+
             exit;
         }
 }
