@@ -6,7 +6,7 @@ body {
     color: #333;
 
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     min-height: 100vh; /* Riempie almeno tutta l'altezza dello schermo */
     box-sizing: border-box;
 }
@@ -62,10 +62,6 @@ h2 {
     text-align: center;
 }
 
-.btn_logout{
-    background-color: #121212;
-    color:#1db954;
-}
 table {
     width: 100%;
     border-collapse: collapse;
